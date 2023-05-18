@@ -30,15 +30,6 @@ class Node(ABC):
             self.parent.children.remove(self)
 
 
-class FileSystemNode(Node):
-
-    def __init__(self, name, last_change_time=None,parent=None) -> None:
-        super().__init__(parent)
-        self.name = name
-
-    def __repr__(self) -> str:
-        return f"<{self.__class__.__name__} '{self.name}'>"
-
 
 
 
