@@ -11,6 +11,7 @@ def buy_ticket_action():
 
     print("Final ticket:", f"\ncost: 1000\nnational id: {national_id}\nevent:{event_id}\nquantity:{num}")
     print("Enjoy the event.")
+    ...
 
 
 
@@ -21,3 +22,31 @@ buy_ticket_menu = PageMenu(buy_ticket_action, "Buy a ticket",parent=tickets_menu
 
 # root_menu.print_tree()
 root_menu()
+
+
+
+main_menu_dict = {
+    'name':'Maktab events',
+    'children':[
+        {
+            'name':'Events',
+            'description':"See all events",
+            'children':[
+                
+            ]
+        },
+        {
+            'name': 'Tickets',
+            'description':"See all Tickets",
+            'children':[
+                {
+                    'name':'Buy ticket',
+                    'action':buy_ticket_action
+                },
+            ]
+        }
+    ]
+}
+
+# root_menu = generate_menu_root_from_dict(main_menu_dict)
+# root_menu()
