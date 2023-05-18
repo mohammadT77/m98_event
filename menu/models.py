@@ -1,18 +1,46 @@
+from abc import ABC, abstractmethod
 
-class Node:
+class Node(ABC):
     # parent: Node
-    # children: list[Node]
+    children: list
 
-    def __init__(self, name, parent = None) -> None:
-        self.parent = parent
+    @abstractmethod
+    def __init__(self, parent = None) -> None:
+        assert parent is None or isinstance(parent, Node)
+        self.children = []
+        self.parent = parent    
+
+        if parent:
+            self.parent.children.append(self)
+
+    def print_tree(self, prefix='', last=False):
+        pointer = '\b\u2514' if last else ('\b\u251C' if prefix else '')
+        print(prefix+pointer, repr(self))
+        
+        for i, child in enumerate(self.children):
+            last = i == len(self.children) - 1
+            if last:
+                child.print_tree(prefix+'\t ', last=True)
+            else:
+                child.print_tree(prefix+'\t|')
+
+            
+    def remove(self):
+        if self.parent:
+            self.parent.children.remove(self)
+
+
+class FileSystemNode(Node):
+
+    def __init__(self, name, last_change_time=None,parent=None) -> None:
+        super().__init__(parent)
         self.name = name
 
     def __repr__(self) -> str:
-        return f"{self.name}"
+        return f"<{self.__class__.__name__} '{self.name}'>"
 
-    def __str__(self):
-        return f"{self.name}"
-    
+
+
 
 
 
