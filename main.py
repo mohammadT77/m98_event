@@ -1,9 +1,23 @@
-from menu.models import FileSystemNode
+from menu.models import ListMenu, PageMenu
 
-n1 = FileSystemNode("Maktab folder")
-n2 = FileSystemNode("HW1", parent=n1)
+def buy_ticket_action():
+    national_id = input("Enter your National ID: ")
+    event_id = input("Enter the Event id: ")
+    num = input("Quantity: ")
 
-n3 = FileSystemNode("Final project", parent=n1)
-n4 = FileSystemNode("main.py",parent=n2)
+    # TODO: find the event from database
+    # TODO: calculate the price
+    # ...
 
-n1.print_tree()
+    print("Final ticket:", f"\ncost: 1000\nnational id: {national_id}\nevent:{event_id}\nquantity:{num}")
+    print("Enjoy the event.")
+
+
+
+root_menu = ListMenu("Maktab Events")
+events_menu = ListMenu("Events", description="See all events", parent=root_menu)
+tickets_menu = ListMenu("Tickets", description="See all Tickets", parent=root_menu)
+buy_ticket_menu = PageMenu(buy_ticket_action, "Buy a ticket",parent=tickets_menu)
+
+# root_menu.print_tree()
+root_menu()
