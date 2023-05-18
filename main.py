@@ -1,29 +1,12 @@
+from menu.models import Node
 
+n1 = Node('n1')
+n2 = Node('n2', parent=n1)
 
+n3 = Node('n3',parent=n1)
+n4 = Node('n4', parent=n2)
+nodes = [n1,n2,n3,n4]
 
-
-def main():
-    print("Maktab 98 Events")
-    print("Description\n")
-
-    print("Items:")
-    print("1. Events")
-    print("2. Ticket management")
-
-    while True:
-
-        user_choice = int(input("Select an item (0 to exit): "))
-        if user_choice==0:
-            exit(0)
-        elif user_choice==1:
-            
-
-            break
-        elif user_choice==2:
-            break
-            # tickets
-        else:
-            print("Invalid choice, try again")
-
-
-
+children = lambda node: filter(lambda n: n.parent == node, nodes)
+is_leaf = lambda node: not list(children(node))  # [] -> True , [n1] -> False
+print(is_leaf(n1))
