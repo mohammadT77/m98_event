@@ -49,7 +49,13 @@ from datetime import datetime
 # print(e1.event_date)
 # print(Event.get_all_path())
 # print(*Event.get_all())
-e1 = Event(1,'a', 1, datetime.now())
-t1 = Ticket(1, e1, '1234')
-t1.save_file()
-print(t1)
+# e1 = Event(1,'a', 1, datetime.now())
+# t1 = Ticket(1, e1, '1234')
+# t1.save_file()
+# print(t1)
+
+# manager_user = ManagerUser('asqar', 'asqar', 'asqar!!!')
+# print(manager_user)
+# manager_user.save_file()
+
+ManagerUser.login()
