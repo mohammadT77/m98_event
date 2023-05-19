@@ -36,8 +36,11 @@ manager_menu_route = {
 def main():
     root_menu = generate_menu_from_dict(manager_menu_route)
 
-    is_login = False # check login
+    is_login = True # check login
     # TODO: Login view
 
     if is_login:
         root_menu()
+
+
+main()
