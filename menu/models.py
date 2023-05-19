@@ -136,8 +136,11 @@ class PageMenu(MenuNode):
             print(self.parent.name, end=' > ')
         print(self.name)
         
+        try:
         # run action function
-        self.action()
+            self.action()
+        except KeyboardInterrupt:
+            print("\nQuit from action...")
 
         print('\n------------------------\n')
         

@@ -29,8 +29,25 @@ main_menu_dict = {
     'name':'Maktab events',
     'children':[
         {
-            'name':'Events',
-            'description':"See all events",
+            'name':'Login as manager',
+            'action': lambda: None,
+        },
+        {
+            'name': 'Events',
+            'children': [
+                {
+                    'name':'See al events',
+                    'action': lambda: None,       
+                },
+                {
+                    'name':'See an event\'s details',
+                    'action': lambda: None,
+                },
+                {
+                    'name': 'Add new event',
+                    'action': lambda: None,
+                }
+            ]
         },
         {
             'name': 'Tickets',
@@ -48,3 +65,8 @@ main_menu_dict = {
 root_menu = generate_menu_from_dict(main_menu_dict, parent=None)
 root_menu()
 # root_menu.print_tree()
+
+def main():
+    # menu: login as manager -> 
+
+    pass
