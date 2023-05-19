@@ -1,5 +1,6 @@
 from menu.models import generate_menu_from_dict
 from ticketing.manager_actions import *
+from ticketing.models import ManagerUser
 
 manager_menu_route = {
     'name':'Maktab events manager panel',
@@ -33,14 +34,23 @@ manager_menu_route = {
 }
 
 
+root_menu = generate_menu_from_dict(manager_menu_route)
+
 def main():
-    root_menu = generate_menu_from_dict(manager_menu_route)
+    username = get_input("Username: ")
+    password = get_input("Password: ")
+    
+    try:
+        login = ManagerUser.login(username, password)
+    except AssertionError:
+        print("Manager user is not set")
+        exit()
 
-    is_login = True # check login
-    # TODO: Login view
-
-    if is_login:
+    if login:
+        print("Welcome manager...\n")
         root_menu()
+    else:
+        print("invalid username or password")
 
 
 main()

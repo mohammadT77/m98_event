@@ -1,30 +1,22 @@
+from ticketing.main_actions import *
+from menu.models import generate_menu_from_dict
 main_menu_route = {
     'name':'Maktab events',
     'children':[
         {
-            'name':'Login as manager',
-            'action': lambda: None,
+            'name': 'See all events',
+            'action': see_all_events_action,
         },
         {
-            'name': 'Events',
-            'children': [
-                {
-                    'name':'See al events',
-                    'action': lambda: None,       
-                },
-                {
-                    'name':'See an event\'s details',
-                    'action': lambda: None,
-                },
-                {
-                    'name': 'Add new event',
-                    'action': lambda: None,
-                }
-            ]
-        },
-        {
-            'name': 'Tickets',
-            'description':"See all Tickets",
+            'name': 'See my tickets',
+            'action': see_my_tickets_action
         }
     ]
 }
+
+root_menu = generate_menu_from_dict(main_menu_route)
+
+def main():
+    root_menu()
+
+main()
