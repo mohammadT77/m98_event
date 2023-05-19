@@ -2,14 +2,14 @@ from menu.utils import get_input
 from .models import Event
 from datetime import datetime
 
-def see_all_events_action():
+def see_all_events_action(): # Done
     all_events = Event.get_all()  # list or generator
 
     for i, event in enumerate(all_events):
         print(i+1, event)  # __str__
 
 
-def event_detail_action():
+def event_detail_action(): # Done
     event_id = get_input("Enter the event id: ", target_type=int)
     try:
         event = Event.find_by_id(event_id)
@@ -25,7 +25,7 @@ def event_detail_action():
     print()
 
 
-def add_new_event_action():
+def add_new_event_action(): # DONE
     print("Enter event's detail below:")
     id = get_input("Id: ", target_type=int)
     title = get_input("Title: ", target_type=str)
@@ -53,4 +53,4 @@ def delete_event_action():
         return
 
     event.delete()
-    print("Event is deleted")
+    print("Event is deleted\n")
