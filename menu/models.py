@@ -59,6 +59,14 @@ class MenuNode(Node):
     def __call__(self):
         pass
 
+    @classmethod
+    def from_dict(cls, data, parent=None):
+        if 'action' in data:
+            return PageMenu.from_dict(data, parent)
+        else:
+            return ListMenu.from_dict(data, parent)
+        
+
 
 class ListMenu(MenuNode):
     
@@ -93,6 +101,20 @@ class ListMenu(MenuNode):
         #     else:
         #         exit()
 
+    @classmethod
+    def from_dict(cls, data, parent=None):
+        name = data['name']
+        description = data.get('description', "")
+        children_data: dict = data.get('children', [])
+        
+        menu = cls(name, parent, description)
+        
+        if children_data:
+            for child_data in children_data:
+                MenuNode.from_dict(child_data, parent=menu)
+            
+        return menu
+
 
 
 
@@ -123,8 +145,30 @@ class PageMenu(MenuNode):
         self.parent()
 
 
+    @classmethod
+    def from_dict(cls, data, parent=None):
+        assert 'action' in data, "Invalid data for PageMenu ('action' not found)"
+        return PageMenu(
+            action=data['action'],
+            name=data.get('name'),
+            parent=parent,
+            description=data.get('description', '')
+        )
 
 
+
+def generate_menu_from_dict(data:dict, parent=None):
+    if action:=data.get('action'):
+        return PageMenu(action, data.get('name'), data.get('description'), parent)
+    else:
+        menu_node = ListMenu(data.get('name'), data.get('description'), parent)
+        
+        if children:=data.get("children"):
+            for child_data in children:
+                generate_menu_from_dict(child_data, menu_node)
+
+        return menu_node
+    
 
 
 
